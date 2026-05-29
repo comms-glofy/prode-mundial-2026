@@ -2,7 +2,7 @@
    style.css — Prode Mundial 2026 · Glofy × Don Gestión
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+/* Fonts cargadas via <link> en el HTML */
 
 :root {
   --glofy-green: #C8FF00;
