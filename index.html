@@ -471,6 +471,154 @@ body {
   .main { padding: 24px 16px; }
 }
 
+
+/* ── CÓMO FUNCIONA (Mi Prode) ──────────────────────────── */
+.como-funciona {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.paso-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.paso-card:hover { border-color: rgba(200,255,0,0.3); }
+.paso-num {
+  font-family: var(--font-title);
+  font-size: 40px;
+  color: var(--glofy-green);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+}
+.paso-titulo {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.paso-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.paso-desc strong { color: var(--glofy-green); }
+
+.prode-cta-wrap {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.btn-prode-main {
+  display: inline-block;
+  background: var(--glofy-green);
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 48px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-bottom: 10px;
+}
+.btn-prode-main:hover { background: #fff; transform: scale(1.02); }
+.prode-cta-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+.prode-cta-sub strong { color: var(--text-main); }
+
+.prode-aviso {
+  background: rgba(255,215,0,0.07);
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.prode-aviso-icon { font-size: 24px; flex-shrink: 0; }
+.prode-aviso strong { color: #FFD700; }
+
+/* ── TABLA EXTERNA ──────────────────────────────────────── */
+.tabla-externa-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.tabla-externa-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+.tabla-externa-icon { font-size: 40px; flex-shrink: 0; }
+.tabla-externa-titulo {
+  font-family: var(--font-title);
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.tabla-externa-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+.premios-tabla {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.premio-tabla-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.premio-tabla-medal { font-size: 22px; }
+.premio-tabla-pos { font-size: 12px; font-weight: 600; color: var(--text-muted); flex: 1; text-align: left; margin-left: 12px; }
+.premio-tabla-monto { font-family: var(--font-title); font-size: 22px; letter-spacing: 1px; }
+.premio-tabla-monto.gold { color: #FFD700; }
+.premio-tabla-monto.silver { color: #C0C0C0; }
+.premio-tabla-monto.bronze { color: #CD7F32; }
+
+.btn-tabla-main {
+  display: inline-block;
+  background: var(--don-blue);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-tabla-main:hover { background: var(--glofy-green); color: #000; transform: scale(1.02); }
+
   </style>
 </head>
 <body>
@@ -566,47 +714,92 @@ body {
   <!-- MI PRODE -->
   <div id="sec-prode" class="section">
     <div class="section-title">MI <span>PRODE</span></div>
+
     <div class="prode-intro">
-      <p>
-        Completá el resultado exacto de cada partido.<br />
-        <strong>3 puntos</strong> por resultado exacto · <strong>1 punto</strong> por acertar ganador o empate.<br />
-        Las quinielas cierran <strong>30 minutos antes</strong> de cada partido.
-      </p>
+      <p>El prode se juega en <strong>ProdeLibre</strong> — gratis, sin contraseña, solo con tu email.<br />
+      Entrás, cargás tus pronósticos antes de cada partido y el ranking se actualiza solo.</p>
     </div>
-    <div id="prode-no-registrado" style="display:none; text-align:center; padding: 32px 0;">
-      <div style="font-size:40px; margin-bottom:12px">👤</div>
-      <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px">Registrate para guardar tus predicciones y aparecer en la tabla.</p>
-      <button class="btn-submit" onclick="mostrarModalRegistro()">REGISTRARME PARA JUGAR</button>
+
+    <div class="como-funciona">
+      <div class="paso-card">
+        <div class="paso-num">1</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Ingresá al grupo</div>
+          <div class="paso-desc">Hacé click en el botón de abajo. Te va a pedir tu email y te llega un link mágico — sin contraseña.</div>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num">2</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Cargá tus pronósticos</div>
+          <div class="paso-desc">Predecí el resultado de cada partido antes de que empiece. <strong>3 puntos</strong> por exacto, <strong>1 punto</strong> por acertar el ganador o empate.</div>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num">3</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Seguí el ranking</div>
+          <div class="paso-desc">Los puntos se actualizan solos con cada resultado. Podés ver la tabla en vivo en cualquier momento.</div>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num">4</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Ganá los premios</div>
+          <div class="paso-desc">Al final del Mundial, los 3 primeros del ranking reciben sus premios. 🥇 $150.000 · 🥈 $100.000 · 🥉 $50.000</div>
+        </div>
+      </div>
     </div>
-    <div class="prode-form" id="prode-form-container"></div>
-    <br />
-    <button class="btn-submit" id="btn-guardar-prode" onclick="guardarTodasLasPredicciones()">GUARDAR MI PRODE ⚽</button>
-    <div class="success-msg" id="success-msg">
-      <h3>¡PRODE GUARDADO!</h3>
-      <p>Tus predicciones fueron registradas. Seguí los partidos y acumulá puntos. ¡Mucha suerte!</p>
+
+    <div class="prode-cta-wrap">
+      <a class="btn-prode-main" href="https://prodelibre.com.ar/join?code=STNGHH" target="_blank" rel="noopener">
+        ⚽ CARGAR MIS PRONÓSTICOS
+      </a>
+      <div class="prode-cta-sub">Se abre ProdeLibre · Código del grupo: <strong>STNGHH</strong></div>
+    </div>
+
+    <div class="prode-aviso">
+      <div class="prode-aviso-icon">⏰</div>
+      <div>Las quinielas cierran <strong>al inicio de cada partido</strong>. Cargá tus pronósticos antes del <strong>11 de junio</strong> para no perderte los primeros partidos.</div>
     </div>
   </div>
 
   <!-- TABLA -->
   <div id="sec-tabla" class="section">
     <div class="section-title">TABLA DE <span>POSICIONES</span></div>
-    <div class="tabla-wrapper">
-      <div class="tabla-header-row">
-        <div class="tabla-col-header">#</div>
-        <div class="tabla-col-header" style="text-align:left">Glofer</div>
-        <div class="tabla-col-header">Exactos</div>
-        <div class="tabla-col-header">Ganador</div>
-        <div class="tabla-col-header">Jugados</div>
-        <div class="tabla-col-header">Puntos</div>
+
+    <div class="tabla-externa-wrap">
+      <div class="tabla-externa-info">
+        <div class="tabla-externa-icon">🏆</div>
+        <div>
+          <div class="tabla-externa-titulo">Ranking en vivo</div>
+          <div class="tabla-externa-desc">La tabla se actualiza automáticamente con cada resultado del Mundial. Los puntos se calculan solos — no necesitás hacer nada.</div>
+        </div>
       </div>
-      <div id="tabla-body">
-        <div class="empty-tabla"><p>Cargando tabla...</p></div>
+
+      <div class="premios-tabla">
+        <div class="premio-tabla-row">
+          <span class="premio-tabla-medal">🥇</span>
+          <span class="premio-tabla-pos">Primer puesto</span>
+          <span class="premio-tabla-monto gold">$150.000</span>
+        </div>
+        <div class="premio-tabla-row">
+          <span class="premio-tabla-medal">🥈</span>
+          <span class="premio-tabla-pos">Segundo puesto</span>
+          <span class="premio-tabla-monto silver">$100.000</span>
+        </div>
+        <div class="premio-tabla-row">
+          <span class="premio-tabla-medal">🥉</span>
+          <span class="premio-tabla-pos">Tercer puesto</span>
+          <span class="premio-tabla-monto bronze">$50.000</span>
+        </div>
       </div>
+
+      <a class="btn-tabla-main" href="https://prodelibre.com.ar/ranking?v=8bf99104" target="_blank" rel="noopener">
+        📊 VER TABLA EN VIVO →
+      </a>
+      <div class="prode-cta-sub" style="text-align:center; margin-top:10px">Se abre el ranking en ProdeLibre · Actualizado con cada partido</div>
     </div>
-    <br />
-    <p style="text-align:center; font-size:11px; color:var(--text-muted)">
-      La tabla se actualiza en tiempo real durante el Mundial
-    </p>
   </div>
 
   <!-- REGLAS -->
@@ -710,32 +903,6 @@ body {
   <div class="footer-copy">© 2026 Glofy × Don Gestión · Acción interna</div>
 </footer>
 
-<!-- ── MODAL REGISTRO ─────────────────────────────────── -->
-<div class="modal-overlay" id="modal-registro">
-  <div class="modal-box">
-    <div class="modal-title">¡UNITE AL PRODE!</div>
-    <div class="modal-sub">Registrate una vez y tus predicciones quedan guardadas para todo el Mundial.</div>
-    <div class="form-group">
-      <label class="form-label" for="reg-nombre">Tu nombre completo</label>
-      <input class="form-input" type="text" id="reg-nombre" placeholder="Ej: Valentina Rodríguez" autocomplete="name" />
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="reg-empresa">Empresa</label>
-      <select class="form-select" id="reg-empresa">
-        <option value="">Seleccioná tu empresa</option>
-        <option value="Glofy">Glofy</option>
-        <option value="Don Gestión">Don Gestión</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="reg-area">Área / Equipo <span style="color:var(--text-muted);font-weight:400">(opcional)</span></label>
-      <input class="form-input" type="text" id="reg-area" placeholder="Ej: Tech, RRHH, Ventas..." />
-    </div>
-    <div class="form-error" id="reg-error"></div>
-    <button class="btn-registrar" id="btn-registrar" onclick="handleRegistro()">REGISTRARME</button>
-    <button class="btn-skip" onclick="cerrarModalRegistro()">Ahora no, solo quiero ver el fixture</button>
-  </div>
-</div>
 
 <!-- ── SCRIPTS ────────────────────────────────────────── -->
 
@@ -749,11 +916,11 @@ body {
 
 const CONFIG = {
   // Supabase → supabase.com → tu proyecto → Settings → API
-  SUPABASE_URL: 'https://lfwhdioadztmruicwgju.supabase.co',
-  SUPABASE_ANON_KEY: 'sb_publishable_cxhoa8Jw6WCK1KTm9Ug1Ag_4OxFSLU2',
+  SUPABASE_URL: 'https://TU_PROYECTO.supabase.co',
+  SUPABASE_ANON_KEY: 'TU_ANON_KEY_AQUI',
 
   // RapidAPI → rapidapi.com/api-sports/api/api-football
-  RAPIDAPI_KEY: 'c61f6b721374bbddfcb823d173d9b4a0',
+  RAPIDAPI_KEY: 'TU_RAPIDAPI_KEY_AQUI',
 
   // Panel admin
   ADMIN_PASSWORD: 'glofy2026',
@@ -1672,3 +1839,4 @@ const FIXTURE_LOCAL = [
   </script>
 </body>
 </html>
+
