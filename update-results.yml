@@ -1,0 +1,77 @@
+# ============================================================
+#  update-results.yml
+#  Sincroniza resultados de API-Football cada hora durante el Mundial
+#  Se activa solo entre el 11 de junio y el 19 de julio de 2026
+# ============================================================
+
+name: Sync Resultados Mundial 2026
+
+on:
+  # Corre cada hora en punto
+  schedule:
+    - cron: '0 * * * *'
+
+  # También se puede disparar manualmente desde GitHub Actions
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Acción a ejecutar'
+        required: true
+        default: 'sync_resultados'
+        type: choice
+        options:
+          - sync_resultados
+          - sync_fixture_ids
+
+jobs:
+  sync:
+    name: Actualizar resultados
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @supabase/supabase-js node-fetch
+
+      - name: Check if Mundial is active
+        id: check_date
+        run: |
+          START="2026-06-11"
+          END="2026-07-20"
+          TODAY=$(date -u +%Y-%m-%d)
+          if [[ "$TODAY" > "$START" && "$TODAY" < "$END" ]]; then
+            echo "active=true" >> $GITHUB_OUTPUT
+            echo "✅ Mundial activo. Ejecutando sync..."
+          else
+            echo "active=false" >> $GITHUB_OUTPUT
+            echo "⏸️ Fuera del período del Mundial ($TODAY). No se ejecuta."
+          fi
+
+      - name: Sync resultados
+        if: steps.check_date.outputs.active == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          ACTION: ${{ inputs.action || 'sync_resultados' }}
+        run: node scripts/sync.js
+
+  # Job separado: solo notifica si hay errores
+  notify_on_failure:
+    name: Notificar error
+    runs-on: ubuntu-latest
+    needs: sync
+    if: failure()
+    steps:
+      - name: Log failure
+        run: |
+          echo "❌ El sync falló. Revisar logs en GitHub Actions."
+          echo "Timestamp: $(date -u)"

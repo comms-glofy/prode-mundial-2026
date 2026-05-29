@@ -1,0 +1,14 @@
+{
+  "name": "prode-mundial-2026",
+  "version": "1.0.0",
+  "description": "Prode interno Mundial 2026 — Glofy × Don Gestión",
+  "private": true,
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "sync:fixture": "ACTION=sync_fixture_ids node scripts/sync.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "node-fetch": "^3.3.2"
+  }
+}

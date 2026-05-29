@@ -1,0 +1,5 @@
+node_modules/
+.env
+.env.local
+# Si usás config local con credenciales reales, no commitear:
+# js/config.local.js

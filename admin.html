@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · Prode Mundial 2026</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .admin-title { font-family: var(--font-title); font-size: 32px; letter-spacing: 4px; }
+    .admin-title span { color: var(--glofy-green); }
+    .back-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: var(--text-muted); font-family: var(--font-body); font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px; cursor: pointer; text-decoration: none; letter-spacing: 1px; }
+    .back-btn:hover { border-color: var(--glofy-green); color: var(--glofy-green); }
+    .login-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 40px; max-width: 400px; margin: 80px auto; text-align: center; }
+    .login-box h2 { font-family: var(--font-title); font-size: 24px; letter-spacing: 3px; color: var(--glofy-green); margin-bottom: 8px; }
+    .login-box p { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
+    .admin-section { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; }
+    .admin-section-title { font-family: var(--font-title); font-size: 20px; letter-spacing: 2px; color: var(--glofy-green); margin-bottom: 16px; }
+    .partido-admin-row { display: grid; grid-template-columns: 1fr 80px 40px 80px 120px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .partido-admin-row:last-child { border-bottom: none; }
+    .partido-admin-name { font-size: 13px; font-weight: 600; }
+    .partido-admin-fecha { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .admin-input { width: 60px; text-align: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: var(--text-main); font-family: var(--font-title); font-size: 20px; padding: 6px 4px; outline: none; }
+    .admin-input:focus { border-color: var(--glofy-green); }
+    .admin-dash { text-align: center; font-family: var(--font-title); font-size: 16px; color: var(--text-muted); }
+    .estado-select { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: var(--text-main); font-size: 11px; padding: 6px 8px; outline: none; appearance: none; cursor: pointer; }
+    .estado-select:focus { border-color: var(--glofy-green); }
+    .btn-save-row { background: var(--glofy-green); color: #000; border: none; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 8px 12px; border-radius: 6px; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; }
+    .btn-save-row:hover { opacity: 0.85; }
+    .btn-save-row:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-sync { background: var(--don-blue); color: #fff; border: none; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 12px 20px; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; }
+    .btn-sync:hover { opacity: 0.85; }
+    .btn-sync:disabled { opacity: 0.4; cursor: not-allowed; }
+    .sync-status { font-size: 12px; color: var(--text-muted); margin-top: 10px; min-height: 18px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 16px; text-align: center; }
+    .stat-num { font-family: var(--font-title); font-size: 36px; color: var(--glofy-green); }
+    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--glofy-green); color: #000; font-weight: 700; font-size: 13px; padding: 12px 20px; border-radius: 8px; z-index: 300; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; }
+    .header-admin { background: #0a1628; border-bottom: 2px solid var(--glofy-green); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .admin-badge { background: rgba(200,255,0,0.15); color: var(--glofy-green); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<div class="header-admin">
+  <div style="font-family:var(--font-title);font-size:20px;letter-spacing:2px">PRODE MUNDIAL 2026 <span style="color:var(--glofy-green)">· ADMIN</span></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span class="admin-badge">Panel Interno</span>
+    <a href="index.html" class="back-btn">← Volver al sitio</a>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div style="font-size:40px;margin-bottom:12px">🔐</div>
+    <h2>ACCESO ADMIN</h2>
+    <p>Panel de administración del Prode Mundial 2026</p>
+    <div class="form-group">
+      <input class="form-input" type="password" id="admin-pass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkLogin()" />
+    </div>
+    <div class="form-error" id="login-error"></div>
+    <button class="btn-registrar" onclick="checkLogin()">INGRESAR</button>
+  </div>
+</div>
+
+<!-- PANEL ADMIN -->
+<div id="admin-panel" style="display:none">
+  <div class="admin-wrap">
+
+    <!-- Stats rápidas -->
+    <div class="admin-section">
+      <div class="admin-section-title">📊 Resumen</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="stat-participantes">—</div><div class="stat-label">Participantes</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-predicciones">—</div><div class="stat-label">Predicciones</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-jugados">—</div><div class="stat-label">Partidos jugados</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-pendientes">—</div><div class="stat-label">Partidos pendientes</div></div>
+      </div>
+    </div>
+
+    <!-- Sync automático -->
+    <div class="admin-section">
+      <div class="admin-section-title">🔄 Actualización automática</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+        Sincroniza los resultados desde API-Football y recalcula todos los puntos automáticamente.
+        Usá esto durante el Mundial cuando hay partidos en curso.
+      </p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-sync" id="btn-sync-resultados" onclick="handleSyncResultados()">⚡ Sincronizar Resultados Ahora</button>
+        <button class="btn-sync" onclick="handleSyncFixture()" style="background:rgba(255,255,255,0.1);color:var(--text-main)">🗓️ Sync IDs Fixture (1 vez)</button>
+      </div>
+      <div class="sync-status" id="sync-status">Listo para sincronizar.</div>
+    </div>
+
+    <!-- Resultados manuales -->
+    <div class="admin-section">
+      <div class="admin-section-title">✏️ Cargar resultados manualmente</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+        Fallback manual en caso de que la API no esté disponible. Al guardar se recalculan los puntos automáticamente.
+      </p>
+      <div id="admin-partidos-list">
+        <p style="color:var(--text-muted);font-size:13px">Cargando partidos...</p>
+      </div>
+    </div>
+
+    <!-- Tabla en vivo -->
+    <div class="admin-section">
+      <div class="admin-section-title">🏆 Tabla de posiciones actual</div>
+      <div id="admin-tabla">
+        <p style="color:var(--text-muted);font-size:13px">Cargando tabla...</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/api-football.js"></script>
+<script>
+
+function checkLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (pass === CONFIG.ADMIN_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    initAdmin();
+  } else {
+    document.getElementById('login-error').textContent = 'Contraseña incorrecta.';
+  }
+}
+
+async function initAdmin() {
+  await Promise.all([cargarStats(), cargarPartidosAdmin(), cargarTablaAdmin()]);
+}
+
+async function cargarStats() {
+  try {
+    const sb = getSupabase();
+    const [{ count: cp }, { count: cpred }, partidos] = await Promise.all([
+      sb.from('participantes').select('*', { count: 'exact', head: true }),
+      sb.from('predicciones').select('*', { count: 'exact', head: true }),
+      sb.from('partidos').select('estado'),
+    ]);
+    const jugados = partidos.data?.filter(p => p.estado === 'finalizado').length || 0;
+    const pendientes = partidos.data?.filter(p => p.estado === 'pendiente').length || 0;
+    document.getElementById('stat-participantes').textContent = cp ?? '—';
+    document.getElementById('stat-predicciones').textContent = cpred ?? '—';
+    document.getElementById('stat-jugados').textContent = jugados;
+    document.getElementById('stat-pendientes').textContent = pendientes;
+  } catch(e) { console.error(e); }
+}
+
+async function cargarPartidosAdmin() {
+  try {
+    const partidos = await getPartidos();
+    const container = document.getElementById('admin-partidos-list');
+    container.innerHTML = partidos.map(p => {
+      const fecha = new Date(p.fecha_utc).toLocaleDateString('es-AR', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', timeZone:'America/Argentina/Buenos_Aires' });
+      return `
+        <div class="partido-admin-row">
+          <div>
+            <div class="partido-admin-name">${p.home} vs ${p.away} ${p.es_argentina ? '🇦🇷' : ''}</div>
+            <div class="partido-admin-fecha">Grupo ${p.grupo} · ${fecha} hs ARG</div>
+          </div>
+          <input class="admin-input" type="number" min="0" max="20" placeholder="—" id="adm-home-${p.id}" value="${p.goles_home ?? ''}" />
+          <div class="admin-dash">—</div>
+          <input class="admin-input" type="number" min="0" max="20" placeholder="—" id="adm-away-${p.id}" value="${p.goles_away ?? ''}" />
+          <select class="estado-select" id="adm-estado-${p.id}">
+            <option value="pendiente" ${p.estado==='pendiente'?'selected':''}>Pendiente</option>
+            <option value="en_curso" ${p.estado==='en_curso'?'selected':''}>En curso</option>
+            <option value="finalizado" ${p.estado==='finalizado'?'selected':''}>Finalizado</option>
+          </select>
+          <button class="btn-save-row" onclick="guardarResultadoManual('${p.id}')">GUARDAR</button>
+        </div>
+      `;
+    }).join('');
+  } catch(e) {
+    document.getElementById('admin-partidos-list').innerHTML = `<p style="color:#ff6b6b;font-size:13px">Error: ${e.message}</p>`;
+  }
+}
+
+async function guardarResultadoManual(partidoId) {
+  const homeVal = document.getElementById(`adm-home-${partidoId}`).value;
+  const awayVal = document.getElementById(`adm-away-${partidoId}`).value;
+  const estado  = document.getElementById(`adm-estado-${partidoId}`).value;
+  const btn = document.querySelector(`button[onclick="guardarResultadoManual('${partidoId}')"]`);
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    const sb = getSupabase();
+    const updateData = { estado, updated_at: new Date().toISOString() };
+    if (homeVal !== '' && awayVal !== '') {
+      updateData.goles_home = parseInt(homeVal);
+      updateData.goles_away = parseInt(awayVal);
+    }
+    await sb.from('partidos').update(updateData).eq('id', partidoId);
+
+    if (estado === 'finalizado') {
+      await sb.rpc('actualizar_puntos_partido', { partido_id_param: partidoId });
+      showToast(`✅ Resultado guardado y puntos calculados`);
+    } else {
+      showToast(`✅ Estado actualizado`);
+    }
+    await Promise.all([cargarStats(), cargarTablaAdmin()]);
+  } catch(e) {
+    showToast(`❌ Error: ${e.message}`);
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'GUARDAR';
+  }
+}
+
+async function handleSyncResultados() {
+  const btn = document.getElementById('btn-sync-resultados');
+  const status = document.getElementById('sync-status');
+  btn.disabled = true;
+  status.textContent = '⏳ Sincronizando con API-Football...';
+  try {
+    const actualizados = await syncResultados();
+    status.textContent = `✅ Sincronización completada. ${actualizados ?? 0} partido(s) actualizado(s). ${new Date().toLocaleTimeString('es-AR')}`;
+    await Promise.all([cargarStats(), cargarPartidosAdmin(), cargarTablaAdmin()]);
+    showToast('✅ Sync completado');
+  } catch(e) {
+    status.textContent = `❌ Error: ${e.message}`;
+    showToast('❌ Error en sync');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function handleSyncFixture() {
+  const status = document.getElementById('sync-status');
+  status.textContent = '⏳ Sincronizando IDs del fixture (puede tardar unos segundos)...';
+  try {
+    await syncFixtureIds();
+    status.textContent = '✅ IDs del fixture sincronizados correctamente.';
+    showToast('✅ Fixture sincronizado');
+  } catch(e) {
+    status.textContent = `❌ Error: ${e.message}`;
+  }
+}
+
+async function cargarTablaAdmin() {
+  try {
+    const tabla = await getTabla();
+    const medals = ['🥇','🥈','🥉'];
+    document.getElementById('admin-tabla').innerHTML = `
+      <div style="display:grid;grid-template-columns:40px 1fr 80px 80px 80px 80px;gap:0;font-size:12px">
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;letter-spacing:1px">#</div>
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;letter-spacing:1px">NOMBRE</div>
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;text-align:center;letter-spacing:1px">EXACTOS</div>
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;text-align:center;letter-spacing:1px">GANADOR</div>
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;text-align:center;letter-spacing:1px">JUGADOS</div>
+        <div style="padding:8px;color:var(--glofy-green);font-weight:700;text-align:center;letter-spacing:1px">PUNTOS</div>
+        ${tabla.map((p, i) => `
+          <div style="padding:8px;color:var(--text-muted)">${i < 3 ? medals[i] : i+1}</div>
+          <div style="padding:8px"><div style="font-weight:600">${p.nombre}</div><div style="font-size:10px;color:var(--text-muted)">${p.empresa}${p.area ? ' · ' + p.area : ''}</div></div>
+          <div style="padding:8px;text-align:center">${p.exactos}</div>
+          <div style="padding:8px;text-align:center">${p.ganador_ok}</div>
+          <div style="padding:8px;text-align:center">${p.jugados}</div>
+          <div style="padding:8px;text-align:center;font-family:var(--font-title);font-size:18px;color:var(--glofy-green)">${p.puntos_total}</div>
+        `).join('')}
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('admin-tabla').innerHTML = `<p style="color:#ff6b6b;font-size:13px">Error: ${e.message}</p>`;
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

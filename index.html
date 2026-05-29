@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prode Mundial 2026 · Glofy × Don Gestión</title>
+  <meta name="description" content="Prode interno del Mundial 2026 — Glofy × Don Gestión" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-header-wrap">
+      <!-- Logo-17: compacto G|D -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3703.26 1080" role="img" aria-label="Glofy | Don Gestión">
+        <defs><style>.lh1{fill:#fff}.lh2{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:23.56px}</style></defs>
+        <g>
+          <path class="lh1" d="M1309.68,475.85v95.78c0,9.84,7.98,17.83,17.83,17.83h70.31s-13.05,13.68-24.27,25.26c-6.23,6.44-6.21,16.66.06,23.07,18.74,19.13,55.9,56.19,75.54,75.62,6.83,6.76,17.96,6.29,24.19-1.02,25.82-30.25,62.08-73.13,70.83-85.97,30.22-42.87,34.38-111.31,31.2-146.64-.89-9.94-9.16-17.59-19.14-17.63-50.84-.23-187.08-.83-232.04-.82-8.03,0-14.53,6.51-14.53,14.54Z"/>
+          <path class="lh1" d="M1218.65,570.22c-6.49-8.61-13.15-20.1-17.7-30.32-56.39-126.78,109.87-267.06,216.66-154.14,5.62,5.94,15.66,6.93,22.31,2.17,21.88-15.68,63.77-48.23,83.72-64.29,7.86-6.33,6.85-15.68.43-23.47-42.49-51.53-107.05-98.61-201.42-96.25-185.92.57-308.44,162.73-279.25,319.88,16.43,112.79,177.41,274.78,261.39,352.63,10.82,10.03,27.1,9.38,38.38-1.75,12.6-12.42,38.21-45.5,57.08-67.03,10.91-12.45,10.74-31.51-1.08-43.1-176.23-172.63-166.7-176-180.51-194.33Z"/>
+        </g>
+        <line class="lh2" x1="1820.51" y1="1031.25" x2="1820.51" y2="56.11"/>
+        <g>
+          <path class="lh1" d="M2642.58,409.56c-14.39-37.52-34.23-69.41-59.56-95.68-25.33-26.27-55.81-46.43-91.45-60.49-35.64-14.06-74.42-21.1-116.3-21.1h-241.05v107.86h223.23c31.26,0,57.82,3.6,79.72,10.79,21.88,7.2,39.87,18.75,53.94,34.69,14.06,15.95,24.22,36.44,30.48,61.44,6.24,25.02,9.38,55.03,9.38,90.04,0,70.67-12.83,123.66-38.46,158.98-25.65,35.33-66.92,52.99-123.81,52.99h-107.87v105.99h134.13c40.01,0,76.59-7.64,109.74-22.98,33.14-15.31,61.58-36.88,85.35-64.71,23.75-27.82,42.05-61.27,54.87-100.36,12.81-39.08,19.23-82.38,19.23-129.91s-7.2-90.04-21.57-127.55Z"/>
+          <rect class="lh1" x="2230.2" y="518.8" width="63.99" height="139.38"/>
+          <rect class="lh1" x="2294.19" y="481.72" width="63.99" height="139.37"/>
+          <rect class="lh1" x="2358.18" y="446.61" width="63.98" height="139.38"/>
+          <path class="lh1" d="M2664.16,537.12c0,47.52-6.42,90.83-19.22,129.9-12.83,39.09-31.12,72.55-54.88,100.36-23.78,27.84-52.21,49.41-85.35,64.72-33.15,15.35-69.73,22.97-109.75,22.97h-260.73s88.26-105.98,126.61-105.98h107.86c56.9,0,98.17-17.66,123.82-53,25.63-35.31,38.45-88.3,38.45-158.97,0-12.61-.41-24.56-1.22-35.87l66.41-49.09,66.41,49.09h.12c.97,11.63,1.46,23.58,1.46,35.87Z"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="header-title">PRODE <span>MUNDIAL</span> 2026</div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div id="user-info"></div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showSection('fixture',this)">Fixture</button>
+        <button class="nav-btn" onclick="showSection('prode',this)">Mi Prode</button>
+        <button class="nav-btn" onclick="showSection('tabla',this)">Tabla</button>
+        <button class="nav-btn" onclick="showSection('reglas',this)">Reglas</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO + COUNTDOWN ───────────────────────────────── -->
+<section class="hero">
+  <div class="hero-eyebrow">Acción Interna · Mundial USA · México · Canadá</div>
+  <div class="hero-main">MUNDIAL <span>2026</span></div>
+  <div class="hero-sub">PRODE INTERNO</div>
+  <div class="countdown-container">
+    <div class="countdown-box"><span class="countdown-num" id="cd-dias">00</span><span class="countdown-label">Días</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-hrs">00</span><span class="countdown-label">Horas</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-min">00</span><span class="countdown-label">Minutos</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-seg">00</span><span class="countdown-label">Segundos</span></div>
+  </div>
+  <div class="countdown-sub">Inicio del Mundial · 11 de Junio de 2026 · Estadio Azteca, México</div>
+</section>
+
+<!-- ── PREMIOS BANNER ─────────────────────────────────── -->
+<section class="premios-banner">
+  <div class="premios-inner">
+    <div class="premio-item"><div class="premio-medal">🥇</div><div><div class="premio-pos">Primer puesto</div><div class="premio-monto gold">$150.000</div></div></div>
+    <div class="premio-item"><div class="premio-medal">🥈</div><div><div class="premio-pos">Segundo puesto</div><div class="premio-monto silver">$100.000</div></div></div>
+    <div class="premio-item"><div class="premio-medal">🥉</div><div><div class="premio-pos">Tercer puesto</div><div class="premio-monto bronze">$50.000</div></div></div>
+  </div>
+</section>
+
+<!-- ── MAIN ───────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- FIXTURE -->
+  <div id="sec-fixture" class="section active">
+    <div class="section-title">FIXTURE <span>OFICIAL</span></div>
+    <div class="argentina-highlight">
+      <div class="arg-title">🇦🇷 Argentina · Grupo J</div>
+      <div class="arg-partidos">
+        <div class="arg-partido">
+          <div class="arg-partido-fecha">Martes 16 Jun · 22:00 hs ARG</div>
+          <div class="arg-partido-equipos">ARGENTINA vs ARGELIA</div>
+          <div class="arg-partido-info">📍 Arrowhead Stadium · Kansas City</div>
+        </div>
+        <div class="arg-partido">
+          <div class="arg-partido-fecha">Lunes 22 Jun · 14:00 hs ARG ⚠️ Laboral</div>
+          <div class="arg-partido-equipos">ARGENTINA vs AUSTRIA</div>
+          <div class="arg-partido-info">📍 AT&amp;T Stadium · Dallas</div>
+        </div>
+        <div class="arg-partido">
+          <div class="arg-partido-fecha">Sábado 27 Jun · 23:00 hs ARG</div>
+          <div class="arg-partido-equipos">ARGENTINA vs JORDANIA</div>
+          <div class="arg-partido-info">📍 AT&amp;T Stadium · Dallas</div>
+        </div>
+      </div>
+    </div>
+    <div id="fixture-container"></div>
+  </div>
+
+  <!-- MI PRODE -->
+  <div id="sec-prode" class="section">
+    <div class="section-title">MI <span>PRODE</span></div>
+    <div class="prode-intro">
+      <p>
+        Completá el resultado exacto de cada partido.<br />
+        <strong>3 puntos</strong> por resultado exacto · <strong>1 punto</strong> por acertar ganador o empate.<br />
+        Las quinielas cierran <strong>30 minutos antes</strong> de cada partido.
+      </p>
+    </div>
+    <div id="prode-no-registrado" style="display:none; text-align:center; padding: 32px 0;">
+      <div style="font-size:40px; margin-bottom:12px">👤</div>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px">Registrate para guardar tus predicciones y aparecer en la tabla.</p>
+      <button class="btn-submit" onclick="mostrarModalRegistro()">REGISTRARME PARA JUGAR</button>
+    </div>
+    <div class="prode-form" id="prode-form-container"></div>
+    <br />
+    <button class="btn-submit" id="btn-guardar-prode" onclick="guardarTodasLasPredicciones()">GUARDAR MI PRODE ⚽</button>
+    <div class="success-msg" id="success-msg">
+      <h3>¡PRODE GUARDADO!</h3>
+      <p>Tus predicciones fueron registradas. Seguí los partidos y acumulá puntos. ¡Mucha suerte!</p>
+    </div>
+  </div>
+
+  <!-- TABLA -->
+  <div id="sec-tabla" class="section">
+    <div class="section-title">TABLA DE <span>POSICIONES</span></div>
+    <div class="tabla-wrapper">
+      <div class="tabla-header-row">
+        <div class="tabla-col-header">#</div>
+        <div class="tabla-col-header" style="text-align:left">Glofer</div>
+        <div class="tabla-col-header">Exactos</div>
+        <div class="tabla-col-header">Ganador</div>
+        <div class="tabla-col-header">Jugados</div>
+        <div class="tabla-col-header">Puntos</div>
+      </div>
+      <div id="tabla-body">
+        <div class="empty-tabla"><p>Cargando tabla...</p></div>
+      </div>
+    </div>
+    <br />
+    <p style="text-align:center; font-size:11px; color:var(--text-muted)">
+      La tabla se actualiza en tiempo real durante el Mundial
+    </p>
+  </div>
+
+  <!-- REGLAS -->
+  <div id="sec-reglas" class="section">
+    <div class="section-title">SISTEMA DE <span>PUNTOS</span></div>
+    <div class="reglas-grid">
+      <div class="regla-card">
+        <div class="regla-icon">🎯</div>
+        <div class="regla-puntos">3 <span>PTS</span></div>
+        <div class="regla-desc">Resultado exacto<br /><em>Ej: Argentina 2 – 1 Austria</em></div>
+      </div>
+      <div class="regla-card">
+        <div class="regla-icon">✅</div>
+        <div class="regla-puntos">1 <span>PT</span></div>
+        <div class="regla-desc">Acertás ganador o empate<br /><em>Sin importar el marcador</em></div>
+      </div>
+      <div class="regla-card">
+        <div class="regla-icon">❌</div>
+        <div class="regla-puntos">0 <span>PTS</span></div>
+        <div class="regla-desc">Resultado incorrecto<br /><em>No se restan puntos</em></div>
+      </div>
+      <div class="regla-card">
+        <div class="regla-icon">🚀</div>
+        <div class="regla-puntos">×2 <span>BONUS</span></div>
+        <div class="regla-desc">Multiplicador en partidos de Argentina durante fase eliminatoria</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px">
+      <div class="prode-grupo-title">🏆 Premios de la empresa</div>
+      <div style="display:grid;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,215,0,0.08);border-radius:10px;border-left:3px solid #FFD700">
+          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FFD700">🥇 Primer puesto</span>
+          <span style="font-family:var(--font-title);font-size:28px;color:#FFD700">$150.000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(192,192,192,0.08);border-radius:10px;border-left:3px solid #C0C0C0">
+          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C0C0C0">🥈 Segundo puesto</span>
+          <span style="font-family:var(--font-title);font-size:28px;color:#C0C0C0">$100.000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(205,127,50,0.08);border-radius:10px;border-left:3px solid #CD7F32">
+          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#CD7F32">🥉 Tercer puesto</span>
+          <span style="font-family:var(--font-title);font-size:28px;color:#CD7F32">$50.000</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(200,255,0,0.05);border:1px solid rgba(200,255,0,0.2);border-radius:var(--radius-md);padding:20px;text-align:center">
+      <p style="font-size:12px;color:var(--text-muted);line-height:1.9">
+        Las quinielas cierran 30 minutos antes de cada partido<br />
+        En caso de empate en puntos, gana quien acertó más resultados exactos<br />
+        Iniciativa cultural interna de <strong style="color:var(--glofy-green)">Glofy × Don Gestión</strong>
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-logo-wrap">
+    <!-- Logo-15: extendido GLOFY | DON GESTIÓN -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3703.26 1080" role="img" aria-label="Glofy | Don Gestión">
+      <defs><style>.lf1{fill:#fff}.lf2{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.95px}</style></defs>
+      <g>
+        <g>
+          <path class="lf1" d="M617.89,657.91c-72.19,0-133.85-51.51-133.85-132.41s62.75-132.41,135.3-132.41c37,0,80.53,13.78,107.01,59.86l-46.07,31.56c-13.42-19.96-33.01-30.84-59.85-30.84-39.18,0-70.74,26.12-70.74,71.82s29.75,74,70.38,74c23.22,0,44.98-9.06,53.32-36.64h-52.96v-52.59h114.99c15.24,92.86-44.98,147.65-117.53,147.65Z"/>
+          <path class="lf1" d="M785.79,396.73h62.76v257.55h-62.76v-257.55Z"/>
+          <path class="lf1" d="M880.43,559.97c0-64.22,51.15-97.95,100.85-97.95s100.48,33.74,100.48,97.95-51.15,97.94-100.48,97.94-100.85-33.74-100.85-97.94ZM1020.09,559.97c0-25.03-17.41-41.73-38.81-41.73s-39.18,16.7-39.18,41.73,17.41,41.71,39.18,41.71,38.81-16.7,38.81-41.71Z"/>
+          <path class="lf1" d="M1189.43,465.65h46.07v49.33h-46.07v139.3h-62.76v-139.3h-25.75v-49.33h25.75v-5.8c0-62.76,44.26-71.46,71.46-71.46,8.71,0,24.67-.36,37.36,7.26v48.25c-10.89-4.36-19.59-2.92-19.95-2.92-18.86,0-25.76,10.89-26.12,24.67Z"/>
+          <path class="lf1" d="M1466.54,465.65l-107.37,257.55h-61.31l30.84-70.74-77.99-186.82h63.84l44.25,115.35,43.89-115.35h63.84Z"/>
+        </g>
+        <g>
+          <path class="lf1" d="M230.49,484.27v55.29c0,5.68,4.61,10.29,10.29,10.29h40.59s-7.53,7.89-14.01,14.58c-3.6,3.72-3.58,9.62.04,13.32,10.82,11.04,32.27,32.44,43.61,43.65,3.94,3.9,10.37,3.63,13.97-.59,14.9-17.46,35.84-42.22,40.89-49.63,17.45-24.75,19.85-64.26,18.01-84.65-.52-5.74-5.29-10.15-11.05-10.18-29.35-.13-107.99-.48-133.95-.47-4.63,0-8.39,3.76-8.39,8.39Z"/>
+          <path class="lf1" d="M177.94,538.75c-3.75-4.97-7.59-11.6-10.22-17.5-32.55-73.19,63.43-154.17,125.07-88.98,3.24,3.43,9.04,4,12.88,1.25,12.63-9.05,36.81-27.84,48.33-37.11,4.54-3.65,3.95-9.05.25-13.55-24.53-29.75-61.8-56.92-116.27-55.56-107.33.33-178.05,93.94-161.2,184.66,9.48,65.11,102.41,158.62,150.89,203.56,6.25,5.79,15.64,5.42,22.16-1.01,7.27-7.17,22.06-26.26,32.95-38.7,6.3-7.19,6.2-18.19-.63-24.88-101.73-99.66-96.23-101.6-104.2-112.18Z"/>
+        </g>
+      </g>
+      <line class="lf2" x1="1587.59" y1="752.75" x2="1587.59" y2="340.71"/>
+      <g>
+        <g>
+          <path class="lf1" d="M2052.71,657.62c-14.67,0-27.75-2.33-39.25-6.97-11.5-4.64-21.21-11.12-29.15-19.44-7.95-8.31-14-18.34-18.16-30.07-4.16-11.74-6.23-24.57-6.23-38.51s2.14-27.14,6.42-38.87c4.28-11.74,10.45-21.76,18.52-30.08,8.07-8.31,17.79-14.73,29.16-19.25,11.37-4.52,24.26-6.78,38.69-6.78s26.89,2.26,38.14,6.78c11.24,4.53,20.84,10.88,28.79,19.07,7.94,8.19,14.05,18.15,18.34,29.89,4.28,11.73,6.42,24.82,6.42,39.24s-2.14,27.45-6.42,39.06c-4.28,11.62-10.39,21.58-18.34,29.89-7.95,8.32-17.61,14.74-28.98,19.25-11.37,4.52-24.02,6.79-37.96,6.79ZM2052.71,617.65c29.09,0,43.64-18.34,43.64-55.01s-14.55-54.65-43.64-54.65-43.64,18.22-43.64,54.65,14.54,55.01,43.64,55.01Z"/>
+          <path class="lf1" d="M2277.15,652.85v-109.29c0-13.94-2.33-23.34-6.97-28.24-4.65-4.89-12.6-7.34-23.84-7.34-24.7,0-37.04,13.82-37.04,41.44v103.42h-47.68v-180.44h45.48v26.4c5.62-10.27,13.08-18.03,22.37-23.29,9.29-5.26,21.27-7.88,35.94-7.88,8.55,0,16.5,1.28,23.84,3.85,7.34,2.57,13.63,6.42,18.89,11.55,5.26,5.13,9.41,11.43,12.47,18.89,3.05,7.46,4.58,16.08,4.58,25.85v125.06h-48.04Z"/>
+          <path class="lf1" d="M2614.92,652.85l-1.1-24.21c-5.87,10.27-15.28,18.28-28.24,24.02-12.96,5.74-27.88,8.62-44.74,8.62s-32.09-3.61-45.66-10.82c-13.57-7.21-25.18-16.87-34.84-28.97-9.66-12.1-17.05-26.04-22.19-41.81-5.13-15.77-7.7-32.09-7.7-48.96,0-17.84,2.57-34.65,7.7-50.43,5.13-15.77,12.71-29.52,22.74-41.26,10.02-11.73,22.49-20.96,37.41-27.69,14.91-6.72,32.27-10.09,52.08-10.09,14.42,0,27.93,2.08,40.52,6.24,12.59,4.16,23.59,9.9,33.01,17.24,9.41,7.34,16.99,16.08,22.74,26.22,5.74,10.15,9.11,21.33,10.08,33.55h-51.35c-.73-5.62-2.69-10.94-5.87-15.95-3.18-5.01-7.21-9.35-12.1-13.02-4.89-3.67-10.58-6.6-17.05-8.8-6.48-2.2-13.15-3.3-19.99-3.3-20.54,0-36.99,7.65-49.33,22.92-12.35,15.28-18.52,37.47-18.52,66.57,0,10.03,1.28,20.12,3.85,30.26,2.57,10.15,6.6,19.32,12.1,27.51,5.5,8.19,12.53,14.85,21.09,19.99,8.56,5.14,18.71,7.7,30.44,7.7,8.31,0,16.07-1.47,23.29-4.4,7.21-2.93,13.51-6.97,18.89-12.1,5.37-5.13,9.59-11.06,12.65-17.79,3.06-6.72,4.58-13.87,4.58-21.45h-53.91v-40.71h101.59v130.93h-42.18Z"/>
+          <path class="lf1" d="M2719.44,575.1c.73,13.7,4.7,24.57,11.92,32.64,7.21,8.07,16.69,12.1,28.42,12.1,7.82,0,14.73-1.77,20.72-5.32,5.99-3.54,9.84-8.49,11.56-14.85h49.14c-5.63,18.59-15.4,32.89-29.34,42.91-13.94,10.03-30.56,15.04-49.88,15.04-60.15,0-90.22-32.76-90.22-98.29,0-13.94,1.95-26.53,5.87-37.77,3.91-11.25,9.59-20.91,17.05-28.98,7.46-8.07,16.56-14.24,27.32-18.52,10.76-4.28,23.11-6.42,37.04-6.42,27.88,0,48.96,8.93,63.26,26.77,14.3,17.85,21.45,44.74,21.45,80.68h-124.33ZM2794.63,545.03c-.25-6.6-1.41-12.41-3.48-17.42-2.08-5.01-4.83-9.17-8.25-12.47-3.43-3.3-7.34-5.74-11.74-7.34-4.4-1.58-8.93-2.38-13.57-2.38-9.54,0-17.79,3.48-24.76,10.45-6.97,6.97-10.94,16.69-11.92,29.16h73.71Z"/>
+          <path class="lf1" d="M2968.83,527.06c-1.23-8.8-4.4-14.97-9.54-18.52-5.14-3.54-13.2-5.32-24.21-5.32-9.05,0-16.01,1.17-20.9,3.48-4.89,2.33-7.34,6.18-7.34,11.56s2.44,9.48,7.34,12.28c4.89,2.81,12.22,5.56,22,8.25,10.27,2.93,20.05,5.57,29.34,7.89,9.29,2.33,17.48,4.83,24.57,7.52,9.54,3.91,16.87,9.23,22.01,15.95,5.13,6.73,7.7,15.95,7.7,27.69,0,18.83-6.67,33.5-19.99,44.01-13.32,10.52-32.95,15.77-58.86,15.77-27.87,0-49.21-5.87-64-17.61-14.8-11.74-22.43-26.77-22.92-45.11h49.15c0,8.56,3.3,15.16,9.9,19.81,6.6,4.65,15.77,6.96,27.5,6.96,8.56,0,16.01-1.4,22.37-4.22,6.36-2.81,9.54-7.64,9.54-14.49,0-6.36-2.88-10.88-8.62-13.57-5.75-2.69-12.53-5.01-20.35-6.97-15.16-3.67-27.38-6.97-36.67-9.9-9.3-2.93-17.12-6.48-23.47-10.64-8.56-5.38-14.49-11.49-17.79-18.34-3.3-6.84-4.95-14.3-4.95-22.37,0-7.58,1.34-14.67,4.03-21.27,2.69-6.6,7.09-12.29,13.2-17.05,6.11-4.77,13.99-8.49,23.66-11.18,9.65-2.69,21.33-4.03,35.02-4.03,26.16,0,45.42,5.01,57.77,15.03,12.34,10.03,19.12,24.82,20.35,44.38h-45.84Z"/>
+          <path class="lf1" d="M3133.5,534.02h44.38v51.35c0,9.54-1.41,18.65-4.22,27.32-2.81,8.68-7.22,16.38-13.2,23.11-5.99,6.73-13.57,12.04-22.74,15.95-9.17,3.91-20.12,5.87-32.82,5.87s-24.45-1.96-33.74-5.87c-9.3-3.91-16.94-9.17-22.92-15.77-5.99-6.6-10.34-14.3-13.02-23.1-2.69-8.8-4.03-18.09-4.03-27.88v-161.37h46.94v48.78h99.76v33.74h-99.76v74.08c0,11.5,2.14,20.35,6.42,26.59,4.28,6.24,11.31,9.36,21.09,9.36s16.56-3.05,21.09-9.17c4.52-6.11,6.78-14.79,6.78-26.04v-46.94Z"/>
+          <path class="lf1" d="M3198.41,450.77v-44.38h47.68v44.38h-47.68ZM3198.41,652.85v-180.44h47.68v180.44h-47.68Z"/>
+          <path class="lf1" d="M3356.47,657.62c-14.67,0-27.75-2.33-39.24-6.97-11.5-4.64-21.22-11.12-29.16-19.44-7.95-8.31-14-18.34-18.15-30.07-4.16-11.74-6.24-24.57-6.24-38.51s2.14-27.14,6.42-38.87c4.28-11.74,10.46-21.76,18.52-30.08,8.07-8.31,17.79-14.73,29.16-19.25,11.37-4.52,24.26-6.78,38.69-6.78s26.89,2.26,38.14,6.78c11.25,4.53,20.84,10.88,28.79,19.07,7.94,8.19,14.05,18.15,18.34,29.89,4.28,11.73,6.42,24.82,6.42,39.24s-2.14,27.45-6.42,39.06c-4.28,11.62-10.39,21.58-18.34,29.89-7.95,8.32-17.61,14.74-28.97,19.25-11.37,4.52-24.02,6.79-37.96,6.79ZM3356.47,617.65c29.09,0,43.64-18.34,43.64-55.01s-14.55-54.65-43.64-54.65-43.64,18.22-43.64,54.65,14.54,55.01,43.64,55.01Z"/>
+          <path class="lf1" d="M3580.92,652.85v-109.29c0-13.94-2.33-23.34-6.97-28.24-4.65-4.89-12.6-7.34-23.84-7.34-24.7,0-37.04,13.82-37.04,41.44v103.42h-47.68v-180.44h45.48v26.4c5.62-10.27,13.08-18.03,22.37-23.29,9.29-5.26,21.27-7.88,35.95-7.88,8.55,0,16.5,1.28,23.84,3.85,7.34,2.57,13.63,6.42,18.89,11.55,5.26,5.13,9.41,11.43,12.47,18.89,3.06,7.46,4.58,16.08,4.58,25.85v125.06h-48.04Z"/>
+        </g>
+        <g>
+          <path class="lf1" d="M1934.94,480.91c-6.08-15.85-14.46-29.33-25.17-40.43-10.7-11.1-23.58-19.62-38.64-25.56-15.06-5.94-31.45-8.92-49.14-8.92h-101.85v45.58h94.32c13.21,0,24.43,1.52,33.69,4.56,9.25,3.04,16.85,7.92,22.79,14.66,5.94,6.74,10.23,15.4,12.88,25.96,2.64,10.57,3.96,23.25,3.96,38.05,0,29.86-5.42,52.25-16.25,67.17-10.84,14.93-28.28,22.39-52.31,22.39h-45.58v44.78h56.67c16.91,0,32.36-3.23,46.37-9.71,14-6.47,26.02-15.58,36.07-27.34,10.04-11.76,17.77-25.89,23.18-42.41,5.41-16.51,8.13-34.81,8.13-54.89s-3.04-38.05-9.12-53.9Z"/>
+          <rect class="lf1" x="1760.7" y="527.07" width="27.04" height="58.89"/>
+          <rect class="lf1" x="1787.73" y="511.4" width="27.04" height="58.89"/>
+          <rect class="lf1" x="1814.77" y="496.56" width="27.04" height="58.89"/>
+          <path class="lf1" d="M1944.06,534.8c0,20.08-2.71,38.38-8.12,54.89-5.42,16.52-13.15,30.65-23.19,42.4-10.05,11.76-22.06,20.88-36.06,27.35-14.01,6.48-29.46,9.71-46.37,9.71h-110.17s37.29-44.78,53.5-44.78h45.58c24.04,0,41.48-7.46,52.32-22.4,10.83-14.92,16.25-37.31,16.25-67.17,0-5.33-.17-10.38-.51-15.15l28.06-20.74,28.06,20.74h.05c.41,4.91.62,9.96.62,15.15Z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="footer-tagline">Iniciativa cultural interna · Mundial USA · México · Canadá 2026</div>
+  <div class="footer-copy">© 2026 Glofy × Don Gestión · Acción interna</div>
+</footer>
+
+<!-- ── MODAL REGISTRO ─────────────────────────────────── -->
+<div class="modal-overlay" id="modal-registro">
+  <div class="modal-box">
+    <div class="modal-title">¡UNITE AL PRODE!</div>
+    <div class="modal-sub">Registrate una vez y tus predicciones quedan guardadas para todo el Mundial.</div>
+    <div class="form-group">
+      <label class="form-label" for="reg-nombre">Tu nombre completo</label>
+      <input class="form-input" type="text" id="reg-nombre" placeholder="Ej: Valentina Rodríguez" autocomplete="name" />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="reg-empresa">Empresa</label>
+      <select class="form-select" id="reg-empresa">
+        <option value="">Seleccioná tu empresa</option>
+        <option value="Glofy">Glofy</option>
+        <option value="Don Gestión">Don Gestión</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="reg-area">Área / Equipo <span style="color:var(--text-muted);font-weight:400">(opcional)</span></label>
+      <input class="form-input" type="text" id="reg-area" placeholder="Ej: Tech, RRHH, Ventas..." />
+    </div>
+    <div class="form-error" id="reg-error"></div>
+    <button class="btn-registrar" id="btn-registrar" onclick="handleRegistro()">REGISTRARME</button>
+    <button class="btn-skip" onclick="cerrarModalRegistro()">Ahora no, solo quiero ver el fixture</button>
+  </div>
+</div>
+
+<!-- ── SCRIPTS ────────────────────────────────────────── -->
+<script src="js/config.js"></script>
+<script src="js/scoring.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/api-football.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
