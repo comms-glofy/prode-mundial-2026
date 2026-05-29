@@ -653,7 +653,6 @@ body {
         <button class="nav-btn active" onclick="showSection('fixture',this)">Fixture</button>
         <button class="nav-btn" onclick="showSection('prode',this)">Mi Prode</button>
         <button class="nav-btn" onclick="showSection('tabla',this)">Tabla</button>
-        <button class="nav-btn" onclick="showSection('reglas',this)">Reglas</button>
       </nav>
     </div>
   </div>
@@ -716,8 +715,8 @@ body {
     <div class="section-title">MI <span>PRODE</span></div>
 
     <div class="prode-intro">
-      <p>El prode se juega en <strong>ProdeLibre</strong> — gratis, sin contraseña, solo con tu email.<br />
-      Entrás, cargás tus pronósticos antes de cada partido y el ranking se actualiza solo.</p>
+      <p>El prode se juega en <strong>ProdeLibre</strong>.<br />
+      Entrás, te logueás, cargás tus pronósticos antes de cada partido y el ranking se actualiza solo.</p>
     </div>
 
     <div class="como-funciona">
@@ -725,7 +724,7 @@ body {
         <div class="paso-num">1</div>
         <div class="paso-body">
           <div class="paso-titulo">Ingresá al grupo</div>
-          <div class="paso-desc">Hacé click en el botón de abajo. Te va a pedir tu email y te llega un link mágico — sin contraseña.</div>
+          <div class="paso-desc">Hacé click en el botón de abajo. Te va a pedir tu email y te llega un mail para ingresar.</div>
         </div>
       </div>
       <div class="paso-card">
@@ -760,7 +759,7 @@ body {
 
     <div class="prode-aviso">
       <div class="prode-aviso-icon">⏰</div>
-      <div>Las quinielas cierran <strong>al inicio de cada partido</strong>. Cargá tus pronósticos antes del <strong>11 de junio</strong> para no perderte los primeros partidos.</div>
+      <div>Las predicciones cierran <strong>al inicio de cada partido</strong>. Cargá tus pronósticos antes del <strong>11 de junio</strong> para no perderte los primeros partidos.</div>
     </div>
   </div>
 
@@ -773,7 +772,7 @@ body {
         <div class="tabla-externa-icon">🏆</div>
         <div>
           <div class="tabla-externa-titulo">Ranking en vivo</div>
-          <div class="tabla-externa-desc">La tabla se actualiza automáticamente con cada resultado del Mundial. Los puntos se calculan solos — no necesitás hacer nada.</div>
+          <div class="tabla-externa-desc">La tabla se actualiza automáticamente con cada resultado del Mundial. Los puntos se calculan solos, no necesitás hacer nada.</div>
         </div>
       </div>
 
@@ -802,60 +801,6 @@ body {
     </div>
   </div>
 
-  <!-- REGLAS -->
-  <div id="sec-reglas" class="section">
-    <div class="section-title">SISTEMA DE <span>PUNTOS</span></div>
-    <div class="reglas-grid">
-      <div class="regla-card">
-        <div class="regla-icon">🎯</div>
-        <div class="regla-puntos">3 <span>PTS</span></div>
-        <div class="regla-desc">Resultado exacto<br /><em>Ej: Argentina 2 – 1 Austria</em></div>
-      </div>
-      <div class="regla-card">
-        <div class="regla-icon">✅</div>
-        <div class="regla-puntos">1 <span>PT</span></div>
-        <div class="regla-desc">Acertás ganador o empate<br /><em>Sin importar el marcador</em></div>
-      </div>
-      <div class="regla-card">
-        <div class="regla-icon">❌</div>
-        <div class="regla-puntos">0 <span>PTS</span></div>
-        <div class="regla-desc">Resultado incorrecto<br /><em>No se restan puntos</em></div>
-      </div>
-      <div class="regla-card">
-        <div class="regla-icon">🚀</div>
-        <div class="regla-puntos">×2 <span>BONUS</span></div>
-        <div class="regla-desc">Multiplicador en partidos de Argentina durante fase eliminatoria</div>
-      </div>
-    </div>
-
-    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px">
-      <div class="prode-grupo-title">🏆 Premios de la empresa</div>
-      <div style="display:grid;gap:12px">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,215,0,0.08);border-radius:10px;border-left:3px solid #FFD700">
-          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FFD700">🥇 Primer puesto</span>
-          <span style="font-family:var(--font-title);font-size:28px;color:#FFD700">$150.000</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(192,192,192,0.08);border-radius:10px;border-left:3px solid #C0C0C0">
-          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C0C0C0">🥈 Segundo puesto</span>
-          <span style="font-family:var(--font-title);font-size:28px;color:#C0C0C0">$100.000</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(205,127,50,0.08);border-radius:10px;border-left:3px solid #CD7F32">
-          <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#CD7F32">🥉 Tercer puesto</span>
-          <span style="font-family:var(--font-title);font-size:28px;color:#CD7F32">$50.000</span>
-        </div>
-      </div>
-    </div>
-
-    <div style="background:rgba(200,255,0,0.05);border:1px solid rgba(200,255,0,0.2);border-radius:var(--radius-md);padding:20px;text-align:center">
-      <p style="font-size:12px;color:var(--text-muted);line-height:1.9">
-        Las quinielas cierran 30 minutos antes de cada partido<br />
-        En caso de empate en puntos, gana quien acertó más resultados exactos<br />
-        Iniciativa cultural interna de <strong style="color:var(--glofy-green)">Glofy × Don Gestión</strong>
-      </p>
-    </div>
-  </div>
-
-</main>
 
 <!-- ── FOOTER ─────────────────────────────────────────── -->
 <footer class="footer">
@@ -1738,7 +1683,7 @@ function renderProdeItem(p) {
           <div class="prode-equipos">${p.home} vs ${p.away}${p.es_argentina ? ' <span class="tag-arg">ARG</span>' : ''}</div>
           <div class="prode-meta">📅 ${fecha} · ${hora} hs ARG</div>
         </div>
-        <div class="pred-cerrada-msg">⏰ Quiniela cerrada</div>
+        <div class="pred-cerrada-msg">⏰ Predicción cerrada</div>
       </div>
     `;
   }
@@ -1839,4 +1784,3 @@ const FIXTURE_LOCAL = [
   </script>
 </body>
 </html>
-
