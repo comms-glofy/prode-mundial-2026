@@ -136,19 +136,6 @@ body {
 .hero-main span { color: var(--glofy-green); }
 .hero-sub { font-family: var(--font-title); font-size: 28px; letter-spacing: 4px; color: var(--don-light); margin-bottom: 32px; }
 
-.countdown-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
-.countdown-box {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid var(--glofy-green);
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-  min-width: 76px;
-  text-align: center;
-}
-.countdown-num { font-family: var(--font-title); font-size: 44px; color: var(--glofy-green); line-height: 1; display: block; }
-.countdown-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; display: block; }
-.countdown-sub { font-size: 11px; color: var(--text-muted); margin-top: 8px; }
-
 /* ── PREMIOS BANNER ────────────────────────────────────── */
 .premios-banner {
   background: linear-gradient(90deg, #0a1628, #1a2d5a, #0a1628);
@@ -462,7 +449,6 @@ body {
 @media (max-width: 640px) {
   .hero-main { font-size: 48px; }
   .hero-sub { font-size: 20px; }
-  .countdown-num { font-size: 34px; }
   .header-title { display: none; }
   .tabla-header-row, .tabla-row { grid-template-columns: 40px 1fr 60px 60px; }
   .tabla-col-header:nth-child(4), .tabla-col-header:nth-child(5),
@@ -470,7 +456,6 @@ body {
   .premios-inner { gap: 16px; }
   .main { padding: 24px 16px; }
 }
-
 
 /* ── CÓMO FUNCIONA (Mi Prode) ──────────────────────────── */
 .como-funciona {
@@ -658,18 +643,11 @@ body {
   </div>
 </header>
 
-<!-- ── HERO + COUNTDOWN ───────────────────────────────── -->
+<!-- ── HERO ─────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-eyebrow">Acción Interna · Mundial USA · México · Canadá</div>
   <div class="hero-main">MUNDIAL <span>2026</span></div>
   <div class="hero-sub">PRODE INTERNO</div>
-  <div class="countdown-container">
-    <div class="countdown-box"><span class="countdown-num" id="cd-dias">00</span><span class="countdown-label">Días</span></div>
-    <div class="countdown-box"><span class="countdown-num" id="cd-hrs">00</span><span class="countdown-label">Horas</span></div>
-    <div class="countdown-box"><span class="countdown-num" id="cd-min">00</span><span class="countdown-label">Minutos</span></div>
-    <div class="countdown-box"><span class="countdown-num" id="cd-seg">00</span><span class="countdown-label">Segundos</span></div>
-  </div>
-  <div class="countdown-sub">Inicio del Mundial · 11 de Junio de 2026 · Estadio Azteca, México</div>
 </section>
 
 <!-- ── PREMIOS BANNER ─────────────────────────────────── -->
@@ -801,7 +779,6 @@ body {
     </div>
   </div>
 
-
 <!-- ── FOOTER ─────────────────────────────────────────── -->
 <footer class="footer">
   <div class="footer-logo-wrap">
@@ -848,7 +825,6 @@ body {
   <div class="footer-copy">© 2026 Glofy × Don Gestión · Acción interna</div>
 </footer>
 
-
 <!-- ── SCRIPTS ────────────────────────────────────────── -->
 
   <script>
@@ -879,7 +855,6 @@ const CONFIG = {
   AUTO_UPDATE: true,
   UPDATE_INTERVAL_MS: 5 * 60 * 1000,
 };
-
 
 // SCORING
 // ============================================================
@@ -935,7 +910,6 @@ function badgePuntos(pts, bonusArg) {
   const label = bonusArg && pts > 1 ? `${pts} ×2` : pts;
   return `<span class="badge-pts ${cls}">${label}</span>`;
 }
-
 
 // SUPABASE CLIENT
 // ============================================================
@@ -1099,7 +1073,6 @@ function suscribirResultados(callback) {
     }, callback)
     .subscribe();
 }
-
 
 // API FOOTBALL
 // ============================================================
@@ -1306,7 +1279,6 @@ function normalizeTeamName(name) {
   return MAP[name] || name;
 }
 
-
 // APP
 // ============================================================
 //  app.js — Lógica principal de la aplicación
@@ -1324,7 +1296,6 @@ const APP = {
 
 // ── Inicialización ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  iniciarCountdown();
   await cargarPartidos();
   renderFixture();
   renderProde();
@@ -1349,16 +1320,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   iniciarAutoUpdate();
 });
 
-// ── Countdown ──────────────────────────────────────────────
-function iniciarCountdown() {
-  function tick() {
-    const diff = CONFIG.MUNDIAL_START - new Date();
-    if (diff <= 0) {
-      setCountdown(0, 0, 0, 0);
-      return;
-    }
-    setCountdown(
-      Math.floor(diff / 86400000),
+    ,
       Math.floor((diff % 86400000) / 3600000),
       Math.floor((diff % 3600000) / 60000),
       Math.floor((diff % 60000) / 1000)
@@ -1366,14 +1328,6 @@ function iniciarCountdown() {
   }
   tick();
   setInterval(tick, 1000);
-}
-
-function setCountdown(d, h, m, s) {
-  const set = (id, val) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = String(val).padStart(2, '0');
-  };
-  set('cd-dias', d); set('cd-hrs', h); set('cd-min', m); set('cd-seg', s);
 }
 
 // ── Carga de datos ─────────────────────────────────────────
@@ -1779,7 +1733,6 @@ const FIXTURE_LOCAL = [
   { id:'usa-par', grupo:'D', home:'EE.UU.',    away:'Paraguay', fecha_utc:'2026-06-15T02:00:00Z', sede:'Gillette Stadium',  ciudad:'Boston',       es_argentina:false, estado:'pendiente', goles_home:null, goles_away:null },
   { id:'ned-jap', grupo:'F', home:'Países Bajos', away:'Japón', fecha_utc:'2026-06-15T19:00:00Z', sede:"Levi's Stadium",  ciudad:'San Francisco', es_argentina:false, estado:'pendiente', goles_home:null, goles_away:null },
 ];
-
 
   </script>
 </body>
