@@ -650,8 +650,7 @@ body {
     <div style="display:flex;align-items:center;gap:12px">
       <div id="user-info"></div>
       <nav class="nav">
-        <button class="nav-btn active" onclick="showSection('fixture',this)">Fixture</button>
-        <button class="nav-btn" onclick="showSection('prode',this)">Mi Prode</button>
+        <button class="nav-btn" onclick="showSection('prode',this)" class="nav-btn active">Mi Prode</button>
         <button class="nav-btn" onclick="showSection('tabla',this)">Tabla</button>
       </nav>
     </div>
@@ -678,34 +677,8 @@ body {
 <!-- ── MAIN ───────────────────────────────────────────── -->
 <main class="main">
 
-  <!-- FIXTURE -->
-  <div id="sec-fixture" class="section active">
-    <div class="section-title">FIXTURE <span>OFICIAL</span></div>
-    <div class="argentina-highlight">
-      <div class="arg-title">🇦🇷 Argentina · Grupo J</div>
-      <div class="arg-partidos">
-        <div class="arg-partido">
-          <div class="arg-partido-fecha">Martes 16 Jun · 22:00 hs ARG</div>
-          <div class="arg-partido-equipos">ARGENTINA vs ARGELIA</div>
-          <div class="arg-partido-info">📍 Arrowhead Stadium · Kansas City</div>
-        </div>
-        <div class="arg-partido">
-          <div class="arg-partido-fecha">Lunes 22 Jun · 14:00 hs ARG ⚠️ Laboral</div>
-          <div class="arg-partido-equipos">ARGENTINA vs AUSTRIA</div>
-          <div class="arg-partido-info">📍 AT&amp;T Stadium · Dallas</div>
-        </div>
-        <div class="arg-partido">
-          <div class="arg-partido-fecha">Sábado 27 Jun · 23:00 hs ARG</div>
-          <div class="arg-partido-equipos">ARGENTINA vs JORDANIA</div>
-          <div class="arg-partido-info">📍 AT&amp;T Stadium · Dallas</div>
-        </div>
-      </div>
-    </div>
-    <div id="fixture-container"></div>
-  </div>
-
   <!-- MI PRODE -->
-  <div id="sec-prode" class="section">
+  <div id="sec-prode" class="section active">
     <div class="section-title">MI <span>PRODE</span></div>
 
     <div class="prode-intro">
@@ -1313,14 +1286,12 @@ const APP = {
   partidos: [],
   predicciones: {},  // partidoId → prediccion guardada
   tablaData: [],
-  seccionActiva: 'fixture',
+  seccionActiva: 'prode',
 };
 
 // ── Inicialización ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   iniciarCountdown();
-  await cargarPartidos();
-  renderFixture();
   renderProde();
 
   if (APP.participanteId) {
